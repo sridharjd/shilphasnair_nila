@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #030303;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+}
+
+.split-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+.split {
+    flex: 1;
+    position: relative;
+    height: 100%;
+}
+
+.left {
+    background-color: #000000;
+    cursor: grab;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.left:active {
+    cursor: grabbing;
+}
+
+/* Three.js canvas styling */
+#moon-container canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    outline: none;
+}
+
+.instructions {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    z-index: 10;
+    pointer-events: none;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.8; }
+}
+
+.right {
+    position: relative;
+    overflow: hidden;
+    background-color: #0a0a0a;
+}
+
+/* Fade transition between the left (black) and right sides */
+.right::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30%;
+    height: 100%;
+    background: linear-gradient(to right, #000000 0%, transparent 100%);
+    z-index: 15; /* Above portrait and lighting, below content overlay */
+    pointer-events: none;
+}
+
+.portrait-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('img18.png');
+    background-size: cover;
+    background-position: center;
+    /* Soften the image slightly to make lighting more effective */
+    filter: contrast(1.1) brightness(0.9) grayscale(20%);
+    transform: scale(1.02); /* Slight zoom for parallax */
+    transition: transform 0.1s ease-out;
+}
+
+.lighting-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Start with a neutral shadow overlay */
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2) 0%, rgba(0, 0, 0, 0.85) 100%);
+    /* Hard-light blend mode creates strong highlights and deep shadows */
+    mix-blend-mode: hard-light;
+    pointer-events: none;
+}
+
+/* An additional gradient to anchor the bottom and add depth */
+.portrait-container::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(to top, #000000 0%, transparent 100%);
+    pointer-events: none;
+}
+
+.content-overlay {
+    position: absolute;
+    bottom: 80px;
+    left: 80px;
+    z-index: 20;
+    pointer-events: none;
+}
+
+.content-overlay h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 4rem;
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+    background: linear-gradient(to right, #ffffff, #a3a3a3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.content-overlay p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 300px;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 1000px) {
+    .split-container {
+        flex-direction: column;
+    }
+    .content-overlay {
+        bottom: 40px;
+        left: 40px;
+    }
+    .content-overlay h1 {
+        font-size: 2.5rem;
+    }
+}

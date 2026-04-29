@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nil(sh)a</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="split-container">
+        <!-- Left Side: 3D Moon -->
+        <div class="split left" id="moon-container">
+            <div class="instructions">Drag to rotate</div>
+        </div>
+        
+        <!-- Right Side: Girl Portrait with dynamic lighting -->
+        <div class="split right">
+            <div class="portrait-container">
+                <div class="lighting-overlay" id="lighting-overlay"></div>
+            </div>
+            
+            <div class="content-overlay">
+                <!-- <h1>Lunar Phase</h1> -->
+                <p>Oliyile Therivadhu Dhevadhaiyaa... 🌖</p>
+                <!-- <p>ஒளியிலே தெரிவது தேவதையா......</p> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Three.js from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
